@@ -5,7 +5,7 @@ exports.getAllHelpers = async (req, res) => {
     try {
         const excludedEmails = ['sunita.d@example.com', 'rajesh.k@example.com', 'meena.k@example.com', 't@g', 'dor@gmail.com'];
         const query = `SELECT helper_id, name, email, contact, age, skill_type, experience, rate_per_hour, availability, about, verified, profile_picture_url FROM helpers WHERE email NOT IN (?)`;
-        const [results] = await pool.execute(query, [excludedEmails]);
+        const [results] = await pool.query(query, [excludedEmails]);
         res.json(results);
     } catch (err) {
         res.status(500).send({
