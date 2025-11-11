@@ -25,7 +25,7 @@ exports.updateHelperDetails = async (req, res) => {
 
     try {
         const query = "UPDATE helpers SET about = ? WHERE helper_id = ?";
-        const [result] = await pool.execute(query, [about, helperId]);
+        const [result] = await pool.query(query, [about, helperId]);
 
         if (result.affectedRows === 0) {
             return res.status(404).send({ message: `Helper with ID ${helperId} not found.` });
