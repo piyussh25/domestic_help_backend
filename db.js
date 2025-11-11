@@ -1,20 +1,18 @@
-const mysql = require('mysql2');
-
-// Create a connection to the database
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost', // Replace with your host name
-  user:   process.env.DB_USER || 'root',     // Replace with your database username   // Replace with your database username      // Replace with your database username
-  password:  process.env.DB_PASSWORD || 'piyush25',// Replace with your database password
-  database:  process.env.DB_DATABASE || 'domestic_help_db', // The database name we created in the .sql file
-   ssl: {
-   rejectUnauthorized: true
-   }
-});
-
-// open the MySQL connection
-connection.connect(error => {
-  if (error) throw error;
-  console.log("Successfully connected to the database.");
-});
-
-module.exports = connection;
+ const mysql = require('mysql2/promise');
+    
+   // Create a connection pool instead of a single connection
+    const pool = mysql.createPool({
+      host: process.env.DB_HOST || 'localhost',
+      user: process.env.DB_USER || 'root',
+       password: process.env.DB_PASSWORD || 'piyush25',
+       database: process.env.DB_DATABASE || 'domestic_help_db',
+     ssl: {
+        rejectUnauthorized: true
+    },
+     waitForConnections: true,
+    connectionLimit: 10, // The maximum number of connections to create at once
+     queueLimit: 0
+    });
+  
+  // Export the pool for use in other files
+    module.exports = pool;
