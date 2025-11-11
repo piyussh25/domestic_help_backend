@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost', // Replace with your host name
   user:   process.env.DB_USER || 'root',     // Replace with your database username   // Replace with your database username      // Replace with your database username
   password:  process.env.DB_PASSWORD || 'piyush25',// Replace with your database password
-  database:  process.env.DB_DATABASE || 'domestic_help_db' // The database name we created in the .sql file
+  database:  process.env.DB_DATABASE || 'domestic_help_db', // The database name we created in the .sql file
    ssl: {
    rejectUnauthorized: true
    }
